@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title>UTM Converter</title>
+</head>
+<body>
+    <div id="main"></div>
+    <script src="main.js"></script>
+    <script src="converter.js"></script>
+    <script>
+        var node = document.getElementById('main');
+        var app = Elm.Main.embed(node);
+
+        var converter = new UtmConverter();
+
+        app.ports.toWgs.subscribe(function (utm) {
+            var wgs = converter.toWgs(utm);
+            app.ports.receiveWgs.send(wgs);
+        });
+    </script>
+</body>
